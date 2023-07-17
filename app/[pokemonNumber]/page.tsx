@@ -4,6 +4,7 @@ import { getPokemon } from "@/lib/pokemonAPI";
 import { ArrowBigLeft, ArrowBigRight } from "lucide-react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import { getPokemonType } from "@/lib/utils";
 
 const PokemonPage = async ({
   params,
@@ -27,11 +28,27 @@ const PokemonPage = async ({
         >
           <ArrowBigLeft size={50} />
         </Link>
-        <h1 className="text-4xl font-bold">
-          {pokemonObject.name.charAt(0).toUpperCase() +
-            pokemonObject.name.slice(1).replaceAll("-", " ")}{" "}
-          #{pokemonObject.id}
-        </h1>
+        <div>
+          <h1 className="text-4xl font-bold">
+            {pokemonObject.name.charAt(0).toUpperCase() +
+              pokemonObject.name.slice(1).replaceAll("-", " ")}{" "}
+            #{pokemonObject.id}
+          </h1>
+          <div className="flex gap-2">
+            {pokemonObject.types.map((type: any) => {
+              return (
+                <h1
+                  className="px-1 text-lg font-semibold text-white rounded-md"
+                  style={{
+                    backgroundColor: getPokemonType(type.type.name),
+                  }}
+                >
+                  {type.type.name.toUpperCase()}
+                </h1>
+              );
+            })}
+          </div>
+        </div>
         <Link
           className={pokemonObject.id >= 1010 ? "opacity-0" : ""}
           href={"/" + (pokemonObject.id + 1)}
