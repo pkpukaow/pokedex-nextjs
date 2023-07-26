@@ -6,6 +6,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getPokemonType } from "@/lib/utils";
 
+import KeypressNavigate from "@/components/keypress-navigate";
+
 const PokemonPage = async ({
   params,
 }: {
@@ -85,6 +87,7 @@ const PokemonPage = async ({
           );
         })}
       </div>
+      <KeypressNavigate />
     </>
   );
 };
